@@ -13,3 +13,7 @@ Project này cần thể hiện:
 - tiếp theo: refactor code để cho thấy ObjectOriented
 - tiếp theo: gom nhóm bằng FINGERPRINT (phone, area, location, TenChungCu, SoPhongNgu)
 - tiếp theo: theo dõi biến động giá của một số căn trong 3 
+
+Kiến trúc:
+- Local:        python -> Data Lake (Folder)      -> Data Warehouse (PostgreSQL)      -> Visualize (Superset)
+- On Cloud:     python -> Data Lake (S3 bucket)   -> Data Warehouse (Redshift)        -> Visualize (Superset on EMR?)
