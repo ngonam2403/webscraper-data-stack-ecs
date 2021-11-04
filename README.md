@@ -19,4 +19,5 @@ Project này cần thể hiện:
 
 Kiến trúc:
 - Local:        python -> Data Lake (Folder)      -> Data Warehouse (PostgreSQL)      -> Visualize (Superset)
+- Local Docker: ???
 - On Cloud:     python -> Data Lake (S3 bucket)   -> Data Warehouse (Redshift)        -> Visualize (Superset on EMR?)
