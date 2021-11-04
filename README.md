@@ -3,6 +3,9 @@
 Mục đích tool:
 - Buyer: 
 -   PriceTracker: fingerprint
+- Business:
+-   Thông tin đối thủ
+-   Thông tin nhân sự tiềm năng
 -   
 
 Project này cần thể hiện:
