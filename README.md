@@ -3,10 +3,10 @@
 Mục đích tool:
 - Buyer: 
 -   PriceTracker: fingerprint
-- Business:
+- Business: (demo quận 3,4,5,6,7,8)
 -   Thông tin đối thủ
 -   Thông tin nhân sự tiềm năng
--   
+-   Overview thị trường
 
 Project này cần thể hiện:
 - một pipeline hoàn chỉnh chạy tay 1 click trên infra docker: crawl -> csv -> (optional: kafka) -> storage -> dwh -> visualize -> data catalog
