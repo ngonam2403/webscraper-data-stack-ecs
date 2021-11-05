@@ -24,6 +24,7 @@ Kiến trúc:
 
 
 Run trên máy của bạn:
+
 $ git clone https://github.com/prakhar1989/FoodTrucks
 
 $ cd FoodTrucks
