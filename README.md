@@ -10,7 +10,7 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 ## Objectives & Design
 - Objectives: create a overview of real estate market in Saigon through a dashboard from crawled data.
 - Design: Airflow on ECS to orchestrate Crawling/Cleaning/Loading, PostgreSQL for storing cleaned data, Metabase for visualization.
-- Metabase dashboard: <link>
+- [Metabase dashboard](http://vizlb-1924166062.ap-southeast-1.elb.amazonaws.com/dashboard/88e7d2ac-587d-4343-b7aa-b7a13e881839)
 
 ### Deploy Instruction
 #### Deploy on Local:
