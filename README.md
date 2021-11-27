@@ -34,6 +34,8 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 ### Next steps
 - add feature: API for different types of user to consume data
 - speed up crawling
+- airflow: add Sensor 
+
 
 
 ### References
