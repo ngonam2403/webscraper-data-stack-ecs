@@ -14,7 +14,7 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 
 ### Deploy Instruction
 #### Deploy on Local:
-- Presequisite
+- Presequisite: [Docker Desktop](https://docs.docker.com/engine/install/) with at least 6GB of RAM, [psql](https://formulae.brew.sh/formula/postgresql@13)
 - Infra
 - docker-compose up
 
