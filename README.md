@@ -19,7 +19,7 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 - docker-compose up
 
 #### Deploy on your AWS: 
-- Presequisite
+- Presequisite: AWS account, AWS-CLI installed, S3, ECS, EFS, DataSync.
 - Infra
 - Config
 - AWS Infrastructure Cost: $2/day ~ $60/month
