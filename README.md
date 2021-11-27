@@ -1,6 +1,4 @@
-# de_01
-
-Title
+# A scalable WebScraper-stack with task-orchestration and data-visualization
 > insert Gifs (nhìn gif xong hiểu luôn flow đi thế nào)
 
 "A scalable WebScraper-stack with task-orchestration and data-visualization"
