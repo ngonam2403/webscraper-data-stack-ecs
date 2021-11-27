@@ -9,6 +9,7 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 > insert image Architecture
 
 
+===========
 Mục đích tool:
 - Buyer: 
 -   PriceTracker: fingerprint
