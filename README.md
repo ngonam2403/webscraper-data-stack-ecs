@@ -1,4 +1,4 @@
-# A scalable WebScraper-stack with task-orchestration and data-visualization
+# A scalable WebScraper-stack with task-orchestration and data-visualization, on AWS ECS
 > insert Gifs (nhìn gif xong hiểu luôn flow đi thế nào)
 
 "A scalable WebScraper-stack with task-orchestration and data-visualization"
