@@ -22,7 +22,7 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 - Presequisite
 - Infra
 - Config
-- AWS Infrastructure Cost
+- AWS Infrastructure Cost: $2/day ~ $60/month
 
 ### Code Walkthrough
 - crawl & save to data lake
@@ -32,9 +32,12 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 ### Design consideration
 
 ### Next steps
+- add feature: API for different types of user to consume data
+- speed up crawling
+
 
 ### References
-
+- Many many thanks: @machado-startdataengineering.com, @l1990790120-localdatastack, 
 
 
 ## Archived
