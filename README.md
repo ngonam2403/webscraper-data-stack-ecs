@@ -10,7 +10,8 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 
 
 ===========
-Mục đích tool:
+
+1. Mục đích tool:
 - Buyer: 
 -   PriceTracker: fingerprint
 - Business: (demo quận 3,4,5,6,7,8)
@@ -18,7 +19,7 @@ Mục đích tool:
 -   Thông tin nhân sự tiềm năng
 -   Overview thị trường
 
-Project này cần thể hiện:
+2. Project này cần thể hiện:
 - một pipeline hoàn chỉnh chạy tay 1 click trên infra docker: crawl -> csv -> (optional: kafka) -> storage -> dwh -> visualize -> data catalog -> FastAPI để các bên khác sử dụng dữ liệu
 -   kafka để listen xem có data mới không, dù là insert hay update.
 - tiếp theo: refactor để orchestrate bằng airflow (schedule, check quality, báo lỗi, v.v.)
@@ -27,16 +28,12 @@ Project này cần thể hiện:
 - tiếp theo: gom nhóm bằng FINGERPRINT (phone, area, location, TenChungCu, SoPhongNgu)
 - tiếp theo: theo dõi biến động giá của một số căn trong 3 
 
-Kiến trúc:
+3. Kiến trúc:
 - Local:        python -> Data Lake (Folder)      -> Data Warehouse (PostgreSQL)      -> Visualize (Superset)
 - Local Docker: ???
 - On Cloud:     python -> Data Lake (S3 bucket)   -> Data Warehouse (Redshift)        -> Visualize (Superset on EMR?)
 
 
-Run trên máy của bạn:
+4. Run trên máy của bạn:
 
-$ git clone https://github.com/prakhar1989/FoodTrucks
 
-$ cd FoodTrucks
-
-$ ./setup-docker.sh
