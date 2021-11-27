@@ -1,5 +1,14 @@
 # de_01
 
+Title
+> insert Gifs (nhìn gif xong hiểu luôn flow đi thế nào)
+
+"A scalable WebScraper-stack with task-orchestration and data-visualization"
+
+Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deployed on AWS ECS with a Load Balancer.
+> insert image Architecture
+
+
 Mục đích tool:
 - Buyer: 
 -   PriceTracker: fingerprint
