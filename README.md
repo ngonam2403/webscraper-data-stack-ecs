@@ -12,19 +12,29 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 - Design: Airflow on ECS to orchestrate Crawling/Cleaning/Loading, PostgreSQL for storing cleaned data, Metabase for visualization.
 - Metabase dashboard: <link>
 
-### A. Deploy Instruction
-A1. Deploy on Local:
+### Deploy Instruction
+#### Deploy on Local:
 - Presequisite
 - Infra
 - docker-compose up
 
-A2. Deploy on your AWS: 
+#### Deploy on your AWS: 
 - Presequisite
 - Infra
 - Config
 - AWS Infrastructure Cost
 
-### B. 
+### Code Walkthrough
+- crawl & save to data lake
+- clean data 
+- load data into postgresql
+
+### Design consideration
+
+### Next steps
+
+### References
+
 
 
 ## Archived
