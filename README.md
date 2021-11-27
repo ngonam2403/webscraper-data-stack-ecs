@@ -6,13 +6,13 @@
 Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deployed on AWS ECS with a Load Balancer.
 > insert image Architecture
 
-``````````
-Objectives & Design
+
+## Objectives & Design
 - Objectives: create a overview of real estate market in Saigon through a dashboard from crawled data.
 - Design: Airflow on ECS to orchestrate Crawling/Cleaning/Loading, PostgreSQL for storing cleaned data, Metabase for visualization.
 - Metabase dashboard: <link>
 
-A. Deploy Instruction
+### A. Deploy Instruction
 A1. Deploy on Local:
 - Presequisite
 - Infra
@@ -24,9 +24,10 @@ A2. Deploy on your AWS:
 - Config
 - AWS Infrastructure Cost
 
-B. 
+### B. 
 
 
+## Archived
 1. Mục đích tool:
 - Buyer: 
 -   PriceTracker: fingerprint
