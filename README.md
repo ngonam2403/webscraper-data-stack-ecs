@@ -457,7 +457,7 @@ aws s3 sync . s3://bucket-superset/try-default-airflow-docker-ecs/
 
 # Create a EFS Filesystem for Mounting
 
-# Create a DataSync task
+# Create a DataSync task to initiate mount & later do specific mounts
 
 ```
 
@@ -466,7 +466,7 @@ Mount your EFS filesystem
 [mount your EFS filesystem to EC2](https://docs.aws.amazon.com/efs/latest/ug/wt1-test.html)
 ```
 mkdir -p efs
-sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-05a24862a3f53b475.efs.ap-southeast-1.amazonaws.com:/ efs
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport <your-filesystem-id>.efs.ap-southeast-1.amazonaws.com:/ efs
 ```
 
 Start a ECS Task
