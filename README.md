@@ -26,7 +26,7 @@ This requires you being familiar with Python3, SQL, Selenium, Docker-Compose and
 - Infra
 - Total AWS Infrastructure Cost: $2/day ~ $60/month
 
-### Code Walkthrough
+## Code Walkthrough
 - Clone this repo ```$ git clone https://github.com/ngonam2403/webscraper-data-stack-ecs.git ```
 - docker-compose file to deploy on Local
 - docker-compose file to deploy on AWS ECS
@@ -539,13 +539,13 @@ ecs-cli compose --project-name $ECS_PROJECT_NAME \
 # Create a ECS service with Application Load Balancer
 ```
 
-### Design & Code consideration
+## Design & Code consideration
 - Use selenium instead of Scrapy/Beautifulsoup4 due to batdongsan.com Cloudflare protection
 - Use metabase due to its ease to share public dashboard
 - Use 2 EC2 instance, a bigger one for Airflow/Postgres/Selenium, and the smaller one for Metabase.
 - Use a Application Load Balancer for Metabase dashboard
 
-### Next steps
+## Next steps
 - add feature: API for different types of user to consume data
 - speed up crawling
 - airflow: add Sensor 
@@ -555,7 +555,7 @@ ecs-cli compose --project-name $ECS_PROJECT_NAME \
 
 
 
-### References
+## References
 - Many many thanks to: [@machado-startdataengineering.com](https://www.startdataengineering.com/post/data-engineering-project-for-beginners-batch-edition/), [@l1990790120-localdatastack](https://l1990790120.github.io/post/2020-04-08-local-airflow-from-scratch/), ... for inspiration & work-arounds
 
 
