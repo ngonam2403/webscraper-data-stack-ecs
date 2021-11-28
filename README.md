@@ -436,7 +436,7 @@ ecs-cli configure --cluster $ECS_CLUSTER_NAME \
   --config-name $ECS_CLUSTER_CONFIG_NAME \
   --region $AWS_REGION
 
-# Creating a Cluster with a x86 EC2 Container Instances: 2vCPU, 4GB RAM.
+# Creating a ECS Cluster with a x86 EC2 Container Instances: t3.medium(2vCPU, 4GB RAM)
 ecs-cli up \
   --capability-iam \
   --keypair $KEY_PAIR_NAME_ON_AWS \
@@ -464,12 +464,12 @@ aws s3 sync . s3://bucket-superset/try-default-airflow-docker-ecs/
 
 ```
 
-Mount your EFS filesystem
-[ssh into your EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
-[mount your EFS filesystem to EC2](https://docs.aws.amazon.com/efs/latest/ug/wt1-test.html)
+Mount your EFS filesystem:
+- [ssh into your EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
+- [mount your EFS filesystem to EC2](https://docs.aws.amazon.com/efs/latest/ug/wt1-test.html)
 ```
 mkdir -p efs
-sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport <your-filesystem-id>.efs.ap-southeast-1.amazonaws.com:/ efs
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport <your-filesystem-id>.efs.<your-aws-region>.amazonaws.com:/ efs
 ```
 
 Start a ECS Task
@@ -504,7 +504,36 @@ aws datasync start-task-execution --task-arn 'arn:aws:datasync:<your-aws-region>
 Create a Load Balancer
 
 Create a ECS service for Metabase dashboard
+```
+# Create a ECS Cluster with a x86 EC2 Container Instances: t3.small(2vCPU, 2GB RAM)
+ecs-cli up \
+  --capability-iam \
+  --keypair $KEY_PAIR_NAME_ON_AWS \
+  --size 1 \
+  --instance-type t3.small \
+  --launch-type EC2 \
+  --region $AWS_REGION \
+  --cluster-config $ECS_CLUSTER_CONFIG_NAME \
+  --ecs-profile $ECS_PROFILE_NAME \
+  --vpc $VPC_ID \
+  --security-group $SECURITY_GROUP_ID \
+  --subnets $SUBNET_1_ID, $SUBNET_2_ID \
+  --force 
+  
+# Upload Task Definition for Metabase
+export COMPOSEFILE=metabase-docker-compose.ecs-ec2.yml
+export ECS_PROJECT_NAME=Project-ec2-metabase
+export ECS_PARAMS=metabase-ecs-params.yml
+ecs-cli compose --project-name $ECS_PROJECT_NAME \
+  --cluster $ECS_CLUSTER_NAME \
+  --file $COMPOSEFILE \
+  --ecs-params $ECS_PARAMS create \
+  --region $AWS_REGION \
+  --launch-type EC2 \
+  --create-log-groups
 
+# Create a ECS service with Application Load Balancer
+```
 
 ### Design & Code consideration
 - Use selenium instead of Scrapy/Beautifulsoup4 due to batdongsan.com Cloudflare protection
