@@ -1,5 +1,6 @@
 # A scalable Web Scraper stack on AWS ECS
-> insert Gifs (nhìn gif xong hiểu luôn flow đi thế nào)
+> insert Gifs (nhìn gif xong hiểu luôn flow đi thế nào): 
+> (ecs-cli up) --> (ecs screen) --> (airflow 3 step) --> (metabase select * from) --> (metabase dashboard)
 
 "A scalable WebScraper-stack with task-orchestration and data-visualization"
 
