@@ -355,8 +355,8 @@ services:
   postgres:
     image: postgres:13.4-alpine 
     volumes:
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/postgres/metabase-volume/entrypoint/:/docker-entrypoint-initdb.d/:ro      # create user for postgres
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/postgres/metabase-volume/db:/var/lib/postgresql/data                      # persist data 
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/postgres/metabase-volume/entrypoint/:/docker-entrypoint-initdb.d/:ro      # create user for postgres
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/postgres/metabase-volume/db:/var/lib/postgresql/data                      # persist data 
     environment:
       POSTGRES_USER: metabaseUser
       POSTGRES_DB: metabase
