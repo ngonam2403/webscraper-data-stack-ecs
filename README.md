@@ -19,12 +19,11 @@ This requires you being familiar with Python3, Selenium, Docker-Compose and some
 
 ### on Local:
 - Presequisite: [Docker Desktop](https://docs.docker.com/engine/install/) with at least 6GB of RAM, [psql](https://formulae.brew.sh/formula/postgresql@13)
-- docker-compose up
+- [docker-compose](https://docs.docker.com/compose/compose-file/compose-file-v2/)
 
 ### on AWS: 
-- Presequisite: [AWS account](https://aws.amazon.com/), AWS-CLI installed, S3, EC2, [ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_reference.html), EFS, DataSync, IAM, Cloudwatch.
+- Presequisite: [AWS account](https://aws.amazon.com/), AWS-CLI installed, S3, EC2, [ECS](https://docs.docker.com/cloud/ecs-compose-features/), EFS, DataSync, IAM, Cloudwatch.
 - Infra
-- Config
 - Total AWS Infrastructure Cost: $2/day ~ $60/month
 
 ### Code Walkthrough
