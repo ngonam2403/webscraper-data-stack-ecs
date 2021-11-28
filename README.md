@@ -549,11 +549,14 @@ ecs-cli compose --project-name $ECS_PROJECT_NAME \
 - add feature: API for different types of user to consume data
 - speed up crawling
 - airflow: add Sensor 
+- consider more visualization tool options: Apache-Superset/Preset for more complex functions, Google Data Studio for less cost, ...
+- consider more orchestration tool: Luigi
+- add Observability to the stack: [Admunsen](https://github.com/amundsen-io/amundsen)/[Datahub](https://datahubproject.io/docs/quickstart), dbt, great-expectation
 
 
 
 ### References
-- Many many thanks: @machado-startdataengineering.com, @l1990790120-localdatastack, 
+- Many many thanks to: [@machado-startdataengineering.com](https://www.startdataengineering.com/post/data-engineering-project-for-beginners-batch-edition/), [@l1990790120-localdatastack](https://l1990790120.github.io/post/2020-04-08-local-airflow-from-scratch/), ... for inspiration & work-arounds
 
 
 
