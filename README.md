@@ -25,6 +25,7 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 - AWS Infrastructure Cost: $2/day ~ $60/month
 
 ### Code Walkthrough
+- git clone this repo ```$ git clone https://github.com/ngonam2403/webscraper-data-stack-ecs.git ```
 - docker-compose file to deploy on Local
 - docker-compose file to deploy on AWS ECS
 ```yaml
