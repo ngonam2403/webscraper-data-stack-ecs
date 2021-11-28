@@ -425,7 +425,10 @@ export ECS_PROJECT_NAME=Project-ec2-airflow
 export KEY_PAIR_NAME_ON_AWS=my-key-pair
 
 # Create a profile using your access key and secret key
-ecs-cli configure profile --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --profile-name $ECS_PROFILE_NAME
+ecs-cli configure profile \
+  --access-key $AWS_ACCESS_KEY_ID \
+  --secret-key $AWS_SECRET_ACCESS_KEY \
+  --profile-name $ECS_PROFILE_NAME
 
 # Create a cluster configuration
 ecs-cli configure --cluster $ECS_CLUSTER_NAME \
@@ -475,7 +478,14 @@ export COMPOSEFILE=airflow2-origin-docker-compose.yml
 export ECS_PROJECT_NAME=Project-ec2-airflow
 export ECS_PARAMS=ecs-params.yml
 
-ecs-cli compose --project-name $ECS_PROJECT_NAME --cluster $ECS_CLUSTER_NAME --file $COMPOSEFILE --ecs-params $ECS_PARAMS up --region $AWS_REGION --launch-type EC2 --create-log-groups
+ecs-cli compose --project-name $ECS_PROJECT_NAME \
+  --cluster $ECS_CLUSTER_NAME \
+  --file $COMPOSEFILE \
+  --ecs-params $ECS_PARAMS up \
+  --region $AWS_REGION \
+  --launch-type EC2 \
+  --create-log-groups
+  
 ```
 
 Debug & Sync airflow dags code
@@ -491,11 +501,16 @@ aws datasync start-task-execution --task-arn 'arn:aws:datasync:<your-aws-region>
 # re-run airflow dag
 ```
 
+Create a Load Balancer
+
+Create a ECS service for Metabase dashboard
+
 
 ### Design & Code consideration
 - Use selenium instead of Scrapy/Beautifulsoup4 due to batdongsan.com Cloudflare protection
 - Use metabase due to its ease to share public dashboard
 - Use 2 EC2 instance, a bigger one for Airflow/Postgres/Selenium, and the smaller one for Metabase.
+- Use a Application Load Balancer for Metabase dashboard
 
 ### Next steps
 - add feature: API for different types of user to consume data
