@@ -29,10 +29,8 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 - docker-compose file to deploy on AWS ECS
 ```yaml
 
-# docker-compose.yml
-
+# airflow-stack-docker-compose.yml
 version: '3'
-
 services:
   redis:
     image: redis:latest
@@ -243,6 +241,8 @@ services:
       - postgres:postgres
       - selenium:selenium
 
+
+
 # ecs-params.yml
 version: 1
 task_definition:
@@ -320,6 +320,82 @@ task_definition:
       essential: false    # khi đi cùng với airflow stack thì để là false.
       cpu_shares: 612     # cpu 512, ram 1gb
       mem_limit: 1GB
+
+```
+
+```yaml
+# metabase-docker-compose.yml
+version: '3'
+services:
+  metabase:
+    image: metabase/metabase:latest
+    volumes: 
+      - /home/ec2-user/efs/try-default-airflow-docker-ecs/metabase/dev/urandom:/dev/random:ro
+      - /home/ec2-user/efs/try-default-airflow-docker-ecs/metabase/data:/var/lib
+    ports:
+      - 3000:3000
+    environment: 
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: 5432
+      MB_DB_USER: metabaseUser
+      MB_DB_PASS: metabaseUserPassword
+      MB_DB_HOST: postgres
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: ec2-metabase
+        awslogs-region: ap-southeast-1
+        awslogs-stream-prefix: metabase
+    links:
+      - postgres:postgres
+    
+
+  postgres:
+    image: postgres:13.4-alpine 
+    volumes:
+      - /home/ec2-user/efs/try-default-airflow-docker-ecs/postgres/metabase-volume/entrypoint/:/docker-entrypoint-initdb.d/:ro      # create user for postgres
+      - /home/ec2-user/efs/try-default-airflow-docker-ecs/postgres/metabase-volume/db:/var/lib/postgresql/data                      # persist data 
+    environment:
+      POSTGRES_USER: metabaseUser
+      POSTGRES_DB: metabase
+      POSTGRES_PASSWORD: metabaseUserPassword
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: ec2-metabase
+        awslogs-region: ap-southeast-1
+        awslogs-stream-prefix: postgres
+
+
+# metabase-ecs-params.yml
+version: 1
+task_definition:
+  services:     
+    postgres:
+      essential: true
+      healthcheck:
+        test: ["CMD", "pg_isready", "-U", "metabaseUser"]
+        interval: 5s
+        retries: 3
+        start_period: 30s
+      cpu_shares: 64
+      mem_limit: 128MB  
+
+    metabase:
+      essential: false
+      cpu_shares: 1800
+      mem_limit: 1.6GB
+      healthcheck:
+        test: ["CMD", "curl", "--fail", "http://localhost:3000/health"]
+        interval: 60s
+        timeout: 10s
+        retries: 3
+        start_period: 60s
+      depends_on:
+        - container_name: postgres
+          condition: HEALTHY
+
 
 ```
 
