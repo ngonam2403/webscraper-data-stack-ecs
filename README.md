@@ -30,7 +30,9 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 ```yaml
 
 # airflow-stack-docker-compose.yml
+# Adapted from: https://airflow.apache.org/docs/apache-airflow/stable/docker-compose.yaml
 version: '3'
+
 services:
   redis:
     image: redis:latest
@@ -50,9 +52,9 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/postgres/airflow-volume/entrypoint/:/docker-entrypoint-initdb.d/:ro
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/out/airflow:/out
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/postgres/airflow-volume/db:/var/lib/postgresql/data    # persist data & not conflict
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/postgres/airflow-volume/entrypoint/:/docker-entrypoint-initdb.d/:ro
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/out/airflow:/out
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/postgres/airflow-volume/db:/var/lib/postgresql/data    # persist data & not conflict
     logging:
       driver: awslogs
       options: 
@@ -160,8 +162,8 @@ services:
     # yamllint enable rule:line-length
     user: "0:0"
     volumes:
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs:/sources
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/data:/data
+      - /home/ec2-user/efs/webscraper-data-stack-ecs:/sources
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/data:/data
     logging:
       driver: awslogs
       options: 
@@ -187,11 +189,11 @@ services:
       AIRFLOW__API__AUTH_BACKEND: 'airflow.api.auth.backend.basic_auth'
       _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
     volumes:
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/out:/opt/airflow/out
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/dags:/opt/airflow/dags
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/logs:/opt/airflow/logs
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/plugins:/opt/airflow/plugins
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/data:/data 
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/out:/opt/airflow/out
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/dags:/opt/airflow/dags
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/logs:/opt/airflow/logs
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/plugins:/opt/airflow/plugins
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/data:/data 
     user: "${AIRFLOW_UID:-50000}:0"
     command: webserver
     ports:
@@ -220,12 +222,12 @@ services:
       AIRFLOW__API__AUTH_BACKEND: 'airflow.api.auth.backend.basic_auth'
       _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
     volumes:
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs:/sources
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/out:/opt/airflow/out
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/dags:/opt/airflow/dags
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/logs:/opt/airflow/logs
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/plugins:/opt/airflow/plugins
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/data:/data 
+      - /home/ec2-user/efs/webscraper-data-stack-ecs:/sources
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/out:/opt/airflow/out
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/dags:/opt/airflow/dags
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/logs:/opt/airflow/logs
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/plugins:/opt/airflow/plugins
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/data:/data 
     user: "${AIRFLOW_UID:-50000}:0"
     command: scheduler
     restart: always
@@ -240,7 +242,6 @@ services:
       - redis:redis
       - postgres:postgres
       - selenium:selenium
-
 
 
 # ecs-params.yml
@@ -330,8 +331,8 @@ services:
   metabase:
     image: metabase/metabase:latest
     volumes: 
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/metabase/dev/urandom:/dev/random:ro
-      - /home/ec2-user/efs/try-default-airflow-docker-ecs/metabase/data:/var/lib
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/metabase/dev/urandom:/dev/random:ro
+      - /home/ec2-user/efs/webscraper-data-stack-ecs/metabase/data:/var/lib
     ports:
       - 3000:3000
     environment: 
