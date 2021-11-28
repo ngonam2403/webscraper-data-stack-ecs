@@ -22,7 +22,7 @@ This requires you being familiar with Python3, Selenium, Docker-Compose and some
 - docker-compose up
 
 ### on AWS: 
-- Presequisite: [AWS account](https://aws.amazon.com/), AWS-CLI installed, S3, ECS, EFS, DataSync.
+- Presequisite: [AWS account](https://aws.amazon.com/), AWS-CLI installed, S3, EC2, [ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_reference.html), EFS, DataSync, IAM, Cloudwatch.
 - Infra
 - Config
 - Total AWS Infrastructure Cost: $2/day ~ $60/month
