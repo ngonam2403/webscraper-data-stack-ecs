@@ -14,7 +14,7 @@
 
 
 
-## Deploy instruction
+## Deploy Instruction
 This requires you being familiar with Python3, SQL, Selenium, Docker-Compose and some AWS services.
 
 ### on Local:
@@ -28,8 +28,8 @@ This requires you being familiar with Python3, SQL, Selenium, Docker-Compose and
 
 ## Code Walkthrough
 - Clone this repo ```$ git clone https://github.com/ngonam2403/webscraper-data-stack-ecs.git ```
-- docker-compose file to deploy on Local
-- docker-compose file to deploy on AWS ECS
+- Deploy on Local: 1 docker-compose file, all-in-one.
+- Deploy on AWS ECS: 2 docker-compose files with 2 ecs-params files. 
 
 
 ```yaml
