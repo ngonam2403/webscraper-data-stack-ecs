@@ -28,7 +28,9 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 - docker-compose file to deploy on Local
 - docker-compose file to deploy on AWS ECS
 ```yaml
-# Adapted from: https://airflow.apache.org/docs/apache-airflow/stable/docker-compose.yaml
+
+# docker-compose.yml
+
 version: '3'
 
 services:
@@ -240,6 +242,85 @@ services:
       - redis:redis
       - postgres:postgres
       - selenium:selenium
+
+# ecs-params.yml
+version: 1
+task_definition:
+  services:
+    redis:
+      essential: true
+      healthcheck:
+        test: ["CMD", "redis-cli", "ping"]
+        interval: 5s
+        timeout: 5s
+        retries: 3
+        start_period: 30s
+      cpu_shares: 64
+      mem_limit: 32MB
+
+    postgres:
+      essential: true
+      healthcheck:
+        test: ["CMD", "pg_isready", "-U", "airflow"]
+        interval: 5s
+        retries: 3
+        start_period: 30s
+      cpu_shares: 64
+      mem_limit: 128MB
+
+    airflow-init:
+      essential: false
+      # airflow-init cần ít nhất là [512MB ram,] để run được, còn không thì sẽ báo lỗi.
+      cpu_shares: 256
+      mem_limit: 512MB
+      depends_on:
+        - container_name: redis
+          condition: HEALTHY
+        - container_name: postgres
+          condition: HEALTHY
+
+    airflow-webserver:
+      essential: false
+      cpu_shares: 512
+      mem_limit: 1250MB
+      healthcheck:
+        test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+        start_period: 60s
+      depends_on:
+        - container_name: redis
+          condition: HEALTHY
+        - container_name: postgres
+          condition: HEALTHY
+        - container_name: airflow-init
+          condition: SUCCESS
+
+    airflow-scheduler: 
+    # Nếu không đủ cpu & ram thì scheduler vẫn hoạt động, nhưng không import gì cả ==> webserver sẽ không thấy gì.
+      essential: false
+      cpu_shares: 512
+      mem_limit: 900MB
+      healthcheck:
+        test: ["CMD-SHELL", 'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"']
+        interval: 10s
+        timeout: 10s
+        retries: 5
+        start_period: 60s
+      depends_on:
+        - container_name: redis
+          condition: HEALTHY
+        - container_name: postgres
+          condition: HEALTHY
+        - container_name: airflow-init
+          condition: SUCCESS
+
+    selenium:
+      essential: false    # khi đi cùng với airflow stack thì để là false.
+      cpu_shares: 612     # cpu 512, ram 1gb
+      mem_limit: 1GB
+
 ```
 
 - crawl & save to data lake
