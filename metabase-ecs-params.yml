@@ -1,0 +1,26 @@
+version: 1
+task_definition:
+  services:     
+    postgres:
+      essential: true
+      healthcheck:
+        test: ["CMD", "pg_isready", "-U", "metabaseUser"]
+        interval: 5s
+        retries: 3
+        start_period: 30s
+      cpu_shares: 64
+      mem_limit: 128MB  
+
+    metabase:
+      essential: false
+      cpu_shares: 1800
+      mem_limit: 1.6GB
+      healthcheck:
+        test: ["CMD", "curl", "--fail", "http://localhost:3000/health"]
+        interval: 60s
+        timeout: 10s
+        retries: 3
+        start_period: 60s
+      depends_on:
+        - container_name: postgres
+          condition: HEALTHY

@@ -1,0 +1,104 @@
+version: 1
+task_definition:
+  # ecs_network_mode: bridge # nếu khác bridge thì mới cần khai báo, không thì thôi.
+  # task_size:
+  #   cpu_limit: 1024
+  #   mem_limit: 3.7GB
+
+  services:
+    redis:
+      essential: true
+      healthcheck:
+        test: ["CMD", "redis-cli", "ping"]
+        interval: 5s
+        timeout: 5s
+        retries: 3
+        start_period: 30s
+      cpu_shares: 64
+      mem_limit: 32MB
+
+    postgres:
+      essential: true
+      healthcheck:
+        test: ["CMD", "pg_isready", "-U", "airflow"]
+        interval: 5s
+        retries: 3
+        start_period: 30s
+      cpu_shares: 64
+      mem_limit: 128MB
+
+    airflow-init:
+      essential: false
+      # airflow-init cần ít nhất là [512MB ram,] để run được, còn không thì sẽ báo lỗi.
+      cpu_shares: 256
+      mem_limit: 512MB
+      depends_on:
+        - container_name: redis
+          condition: HEALTHY
+        - container_name: postgres
+          condition: HEALTHY
+
+    airflow-webserver:
+      essential: false
+      cpu_shares: 512
+      mem_limit: 1250MB
+      healthcheck:
+        test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+        start_period: 60s
+      depends_on:
+        - container_name: redis
+          condition: HEALTHY
+        - container_name: postgres
+          condition: HEALTHY
+        - container_name: airflow-init
+          condition: SUCCESS
+
+    airflow-scheduler: 
+    # Nếu không đủ cpu & ram thì scheduler vẫn hoạt động, nhưng không import gì cả ==> webserver sẽ không thấy gì.
+      essential: false
+      cpu_shares: 512
+      mem_limit: 900MB
+      healthcheck:
+        test: ["CMD-SHELL", 'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"']
+        interval: 10s
+        timeout: 10s
+        retries: 5
+        start_period: 60s
+      depends_on:
+        - container_name: redis
+          condition: HEALTHY
+        - container_name: postgres
+          condition: HEALTHY
+        - container_name: airflow-init
+          condition: SUCCESS
+
+    selenium:
+      essential: false    # khi đi cùng với airflow stack thì để là false.
+      cpu_shares: 612     # cpu 512, ram 1gb
+      mem_limit: 1GB
+    
+  
+
+# run_params:
+  # service_discovery:
+  #   container_name: string
+  #   container_port: integer
+  #   private_dns_namespace:
+  #       vpc: string
+  #       id: string
+  #       name: string
+  #       description: string
+  #   public_dns_namespace:
+  #       id: string
+  #       name: string
+  #   service_discovery_service:
+  #       name: string
+  #       description: string
+  #       dns_config:
+  #         type: string
+  #         ttl: integer
+  #       healthcheck_custom_config:
+  #         failure_threshold: integer

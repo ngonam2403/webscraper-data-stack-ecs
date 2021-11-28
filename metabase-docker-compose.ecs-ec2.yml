@@ -1,0 +1,41 @@
+version: '3'
+services:
+  metabase:
+    image: metabase/metabase:latest
+    volumes: 
+      - /home/ec2-user/efs/try-default-airflow-docker-ecs/metabase/dev/urandom:/dev/random:ro
+      - /home/ec2-user/efs/try-default-airflow-docker-ecs/metabase/data:/var/lib
+    ports:
+      - 3000:3000
+    environment: 
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: 5432
+      MB_DB_USER: metabaseUser
+      MB_DB_PASS: metabaseUserPassword
+      MB_DB_HOST: postgres
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: ec2-metabase
+        awslogs-region: ap-southeast-1
+        awslogs-stream-prefix: metabase
+    links:
+      - postgres:postgres
+    
+
+  postgres:
+    image: postgres:13.4-alpine 
+    volumes:
+      - /home/ec2-user/efs/try-default-airflow-docker-ecs/postgres/metabase-volume/entrypoint/:/docker-entrypoint-initdb.d/:ro      # create user for postgres
+      - /home/ec2-user/efs/try-default-airflow-docker-ecs/postgres/metabase-volume/db:/var/lib/postgresql/data                      # persist data 
+    environment:
+      POSTGRES_USER: metabaseUser
+      POSTGRES_DB: metabase
+      POSTGRES_PASSWORD: metabaseUserPassword
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: ec2-metabase
+        awslogs-region: ap-southeast-1
+        awslogs-stream-prefix: postgres
