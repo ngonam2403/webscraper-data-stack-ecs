@@ -3,8 +3,6 @@
 ![This is an image](https://media.giphy.com/media/G25Xw7QTxMKXz7picL/giphy.gif)
 
 
-> A scalable WebScraper-stack with task-orchestration and data-visualization
-
 ## Architecture 
 ![This is an image](https://imgur.com/JHlqmgY.png?raw=true)
 
@@ -16,8 +14,8 @@
 
 
 
-## Deploy detailed instruction
-This requires you being familiar with Python3, Selenium, Docker-Compose and some AWS services.
+## Deploy instruction
+This requires you being familiar with Python3, SQL, Selenium, Docker-Compose and some AWS services.
 
 ### on Local:
 - Presequisite: [Docker Desktop](https://docs.docker.com/engine/install/) with at least 6GB of RAM, [psql](https://formulae.brew.sh/formula/postgresql@13)
@@ -29,7 +27,7 @@ This requires you being familiar with Python3, Selenium, Docker-Compose and some
 - Total AWS Infrastructure Cost: $2/day ~ $60/month
 
 ### Code Walkthrough
-- git clone this repo ```$ git clone https://github.com/ngonam2403/webscraper-data-stack-ecs.git ```
+- Clone this repo ```$ git clone https://github.com/ngonam2403/webscraper-data-stack-ecs.git ```
 - docker-compose file to deploy on Local
 - docker-compose file to deploy on AWS ECS
 ```yaml
