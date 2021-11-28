@@ -48,7 +48,7 @@ export ECS_CLUSTER_NAME=cluster-ec2-airflow
 export ECS_CLUSTER_CONFIG_NAME=ClusterConfig-ec2-airflow
 export ECS_PROJECT_NAME=Project-ec2-airflow
 
-export KEY_PAIR_NAME_ON_AWS=
+export KEY_PAIR_NAME_ON_AWS=my-key-pair
 
 # Create a profile using your access key and secret key
 ecs-cli configure profile --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --profile-name $ECS_PROFILE_NAME
