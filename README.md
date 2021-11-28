@@ -94,7 +94,10 @@ mkdir -p efs
 sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-05a24862a3f53b475.efs.ap-southeast-1.amazonaws.com:/ efs
 ```
 
-### Design consideration
+### Design & Code consideration
+- Use selenium instead of Scrapy/Beautifulsoup4 due to batdongsan.com Cloudflare protection
+- Use metabase due to its ease to share public dashboard
+- Use 2 EC2 instance, a bigger one for Airflow/Postgres/Selenium, and the smaller one for Metabase.
 
 ### Next steps
 - add feature: API for different types of user to consume data
