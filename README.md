@@ -15,9 +15,10 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 
 
 ## Deploy detailed instruction
+This requires you being familiar with Python3, Selenium, Docker-Compose and some AWS services.
+
 ### on Local:
 - Presequisite: [Docker Desktop](https://docs.docker.com/engine/install/) with at least 6GB of RAM, [psql](https://formulae.brew.sh/formula/postgresql@13)
-- Infra
 - docker-compose up
 
 ### on AWS: 
