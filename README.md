@@ -1,13 +1,13 @@
 # A scalable Web Scraper stack on AWS ECS
 
-![Alt Text](https://media.giphy.com/media/G25Xw7QTxMKXz7picL/source.gif)
+![Alt Text](https://media.giphy.com/media/G25Xw7QTxMKXz7picL/giphy.gif)
 
 
 
-"A scalable WebScraper-stack with task-orchestration and data-visualization"
+> A scalable WebScraper-stack with task-orchestration and data-visualization
 
-Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deployed on AWS ECS with a Load Balancer.
-> insert image Architecture
+## Architecture 
+![Alt Text](https://imgur.com/JHlqmgY.png)
 
 
 ## Objectives & Design
