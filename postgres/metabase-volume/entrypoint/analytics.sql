@@ -1,0 +1,6 @@
+CREATE USER metabase;
+CREATE DATABASE metabase;
+GRANT ALL PRIVILEGES ON DATABASE metabase TO metabase;
+
+CREATE DATABASE analytics;
+CREATE EXTENSION hstore;
