@@ -1,13 +1,12 @@
 # A scalable Web Scraper stack on AWS ECS
 
-![Alt Text](https://media.giphy.com/media/G25Xw7QTxMKXz7picL/giphy.gif)
-
+![This is an image](https://media.giphy.com/media/G25Xw7QTxMKXz7picL/giphy.gif)
 
 
 > A scalable WebScraper-stack with task-orchestration and data-visualization
 
 ## Architecture 
-![Alt Text](https://imgur.com/JHlqmgY.png)
+![This is an image](https://imgur.com/JHlqmgY.png?raw=true)
 
 
 ## Objectives & Design
