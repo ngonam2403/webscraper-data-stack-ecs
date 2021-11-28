@@ -12,17 +12,19 @@ Architecture: WebScraper-stack (Selenium, Airflow, PostgreSQL, Metabase) deploye
 - Design: Airflow on ECS to orchestrate Crawling/Cleaning/Loading, PostgreSQL for storing cleaned data, Metabase for visualization.
 - [Metabase dashboard](http://vizlb-1924166062.ap-southeast-1.elb.amazonaws.com/public/dashboard/88e7d2ac-587d-4343-b7aa-b7a13e881839)
 
-### Deploy Instruction
-#### Deploy on Local:
+
+
+## Deploy detailed instruction
+### on Local:
 - Presequisite: [Docker Desktop](https://docs.docker.com/engine/install/) with at least 6GB of RAM, [psql](https://formulae.brew.sh/formula/postgresql@13)
 - Infra
 - docker-compose up
 
-#### Deploy on your AWS: 
+### on AWS: 
 - Presequisite: [AWS account](https://aws.amazon.com/), AWS-CLI installed, S3, ECS, EFS, DataSync.
 - Infra
 - Config
-- AWS Infrastructure Cost: $2/day ~ $60/month
+- Total AWS Infrastructure Cost: $2/day ~ $60/month
 
 ### Code Walkthrough
 - git clone this repo ```$ git clone https://github.com/ngonam2403/webscraper-data-stack-ecs.git ```
