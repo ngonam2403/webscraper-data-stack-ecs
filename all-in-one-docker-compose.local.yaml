@@ -42,8 +42,7 @@ services:
     restart: always     # cái này để khi bị sập nguồn thì nó tự động mở lại
 
   postgres:
-    image: postgres:12
-    # image: postgres:13
+    image: postgres:13
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_DB=airflow
@@ -55,7 +54,10 @@ services:
       - ./postgres/:/docker-entrypoint-initdb.d/:ro
       - ./out:/out
       - ./data:/input_data
-      - ./data/db:/var/lib/postgresql/data 
+      - ./data/db:/var/lib/postgresql/data                                          # persist data for Airflow
+      
+      - ./postgres/metabase-volume/entrypoint/:/docker-entrypoint-initdb.d/:ro      # create Metabase user for postgres
+      - ./postgres/metabase-volume/db:/var/lib/postgresql/data                      # persist data for Metabase 
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
       interval: 5s
@@ -199,3 +201,18 @@ services:
     ports:
         - 4444:4444
     restart: always   
+    
+  metabase:
+    image: metabase/metabase:latest
+    volumes: 
+      - .metabase/dev/urandom:/dev/random:ro
+      - .metabase/data:/var/lib
+    ports:
+      - 3000:3000
+    environment: 
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: 5432
+      MB_DB_USER: metabaseUser
+      MB_DB_PASS: metabaseUserPassword
+      MB_DB_HOST: postgres
