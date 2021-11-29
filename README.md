@@ -4,7 +4,7 @@
 
 
 ## Architecture 
-![This is an image](https://imgur.com/PChZbUt.png)
+![This is an image](https://imgur.com/8q8CeTq.png)
 
 
 ## Objectives & Design
