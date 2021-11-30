@@ -28,6 +28,7 @@ This requires you being familiar with Python3, SQL, Selenium, Docker-Compose and
 
 ## Code Walkthrough
 - Clone this repo ```$ git clone https://github.com/ngonam2403/webscraper-data-stack-ecs.git ```
+- In order to make Airflow works with Selenium, we got to build a custom `Docker Image` from the `Dockerfile`. Then upload to Docker Hub https://hub.docker.com/repository/docker/ngonam24/airflow-selenium 
 - Deploy on Local: 1 docker-compose file, all-in-one.
 - Deploy on AWS ECS: 2 docker-compose files with 2 ecs-params files. We use 2 EC2 instances, a bigger one for Airflow/Postgres/Selenium, and the smaller one for Metabase.
 
