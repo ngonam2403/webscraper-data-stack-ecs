@@ -1,6 +1,6 @@
 # A scalable Web Scraper stack on AWS ECS
 
-![This is an image](https://media.giphy.com/media/G25Xw7QTxMKXz7picL/giphy.gif)
+![This is an image](https://media.giphy.com/media/jloMAPddOFbpQYqZHI/giphy.gif)
 
 
 ## Architecture 
